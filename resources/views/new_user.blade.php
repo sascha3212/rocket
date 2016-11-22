@@ -8,7 +8,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Gebruiker gegevens</div>
                         <div class="panel-body">
-                            <form class="form-horizontal" role="form" method="POST" action="{{url('/add_new_user')}}">
+                            <form class="form-horizontal" role="form" method="POST" action="{{url('/new_user')}}">
                                 {{ csrf_field() }}
 
                                 <div class="form-group">
@@ -16,7 +16,7 @@
 
                                     <div class="col-md-6">
                                         <input id="voornaam" type="text" class="form-control" name="voornaam"
-                                               value="{{ $user->voornaam }}" required autofocus>
+                                               required autofocus>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -24,7 +24,7 @@
 
                                     <div class="col-md-6">
                                         <input id="tussenvoegsel" type="text" class="form-control" name="tussenvoegsel"
-                                               value="{{ $user->tussenvoegsel }}" autofocus>
+                                                autofocus>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -32,7 +32,7 @@
 
                                     <div class="col-md-6">
                                         <input id="achternaam" type="text" class="form-control" name="achternaam"
-                                               value="{{ $user->achternaam }}" required autofocus>
+                                                required autofocus>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -40,7 +40,7 @@
 
                                     <div class="col-md-6">
                                         <input id="geboren" type="text" class="form-control" name="geboren"
-                                               value="{{ $user->geboren }}" required autofocus>
+                                                required autofocus>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -48,7 +48,7 @@
 
                                     <div class="col-md-6">
                                         <input id="geslacht" type="text" class="form-control" name="geslacht"
-                                               value="{{ $user->geslacht }}" required autofocus>
+                                                required autofocus>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -56,7 +56,7 @@
 
                                     <div class="col-md-6">
                                         <input id="adres" type="text" class="form-control" name="adres"
-                                               value="{{ $user->adres }}" required autofocus>
+                                                required autofocus>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -64,7 +64,7 @@
 
                                     <div class="col-md-6">
                                         <input id="huisnr" type="text" class="form-control" name="huisnr"
-                                               value="{{ $user->huisnr }}" required autofocus>
+                                                required autofocus>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -72,7 +72,7 @@
 
                                     <div class="col-md-6">
                                         <input id="postcode" type="text" class="form-control" name="postcode"
-                                               value="{{ $user->postcode }}" required autofocus>
+                                               required autofocus>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -80,7 +80,7 @@
 
                                     <div class="col-md-6">
                                         <input id="plaats" type="text" class="form-control" name="plaats"
-                                               value="{{ $user->plaats }}" required autofocus>
+                                                required autofocus>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -88,7 +88,7 @@
 
                                     <div class="col-md-6">
                                         <input id="telefoon" type="text" class="form-control" name="telefoon"
-                                               value="{{ $user->telefoon }}" required autofocus>
+                                                required autofocus>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -96,15 +96,14 @@
 
                                     <div class="col-md-6">
                                         <input id="email" type="text" class="form-control" name="email"
-                                               value="{{ $user->email }}" required autofocus>
+                                                required autofocus>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="username" class="col-md-4 control-label">Username:</label>
 
                                     <div class="col-md-6">
-                                        <input id="username" type="text" class="form-control" name="username"
-                                               value="{{ $user->username }}" required autofocus>
+                                        <input id="username" type="text" class="form-control" name="username" autofocus>
                                     </div>
                                 </div>
                                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
@@ -139,36 +138,11 @@
                                 <div class="form-group">
                                     <div class="col-md-8 col-md-offset-4">
                                         <button type="submit" class="btn btn-primary">
-                                            Wijzig
+                                            Voeg toe
                                         </button>
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Lespakket(ten)</div>
-                        <div class="panel-body">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>Voertuig</th>
-                                    <th>Lespakket</th>
-                                    <th>Lessen aantal</th>
-                                    <th>Prijs</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($user->toLespakket as $lespakket)
-                                    <tr>
-                                        <td>{{ucfirst($lespakket->toVoertuigtype->lestype)}}</td>
-                                        <td>{{ucfirst($lespakket->lespakket)}}</td>
-                                        <td>{{$lespakket->lessenaantal}}</td>
-                                        <td>&#8364; {{$lespakket->toLesPrijs->prijs}}</td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>

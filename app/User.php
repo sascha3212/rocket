@@ -9,13 +9,26 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'voornaam',
+        'tussenvoegsel',
+        'achternaam',
+        'geboren',
+        'geslacht',
+        'adres',
+        'huisnr',
+        'plaats',
+        'postcode',
+        'plaats',
+        'telefoon',
+        'email',
+        'username',
     ];
 
     /**
@@ -27,8 +40,43 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function roltoekenning()
+
+    public function toLicentie()
     {
-        return $this->belongsTo('App\Roltoekenning', 'user_id', 'users_id');
+        return $this->belongsToMany('App\Voertuigtype', 'licentie', 'users_id', 'voertuigtype_voertuigtype_id');
     }
+
+    public function toLespakket()
+    {
+        return $this->belongsToMany('App\Lespakket', 'contract', 'users_id', 'lespakket_lespakket_id');
+    }
+    public function toRol()
+    {
+        return $this->belongsToMany('App\Rol', 'roltoekenning', 'users_id', 'rol_rol_id');
+    }
+
+    public function hasAnyRole($roles)
+    {
+        if(is_array($roles)) {
+            foreach ($roles as $role) {
+                if ($this->hasRole($role)) {
+                    return true;
+                }
+            }
+        }else{
+            if ($this->hasRole($roles)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function hasRole($role)
+    {
+        if ($this->toRol()->where("rol_id", $role)->first()){
+            return true;
+        }
+        return false;
+    }
+
 }

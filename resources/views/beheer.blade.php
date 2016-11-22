@@ -5,367 +5,283 @@
     <header id="page-top">
         <div class="container">
             <div class="intro-text">
-                <div class="intro-lead-in">Welcome To Our Studio!</div>
-                <div class="intro-heading">It's Nice To Meet You</div>
-                <a href="#services" class="page-scroll btn btn-xl">Tell Me More</a>
+                <div class="intro-lead-in">Welkom op het admin paneel</div>
+                <div class="intro-heading">Hier beheert u de website</div>
+                <a href="#beheer" class="page-scroll btn btn-xl">Beheren</a>
             </div>
         </div>
     </header>
 
     <!-- About Section -->
-    <section id="about">
+    <section id="beheer">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Informatie</h2>
-                    <h3 class="section-subheading text-muted">Een samenvatting van het begin van onze rijschool.</h3>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <ul class="timeline">
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/1.jpg" alt="">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                       aria-expanded="true" aria-controls="collapseOne">
+                                        Gebruikers
+                                    </a>
+                                </h4>
                             </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>2009-2011</h4>
-                                    <h4 class="subheading">Our Humble Beginnings</h4>
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                                 aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Voornaam</th>
+                                            <th>Achternaam</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($users as $user)
+                                            @foreach($user->toRol as $test)
+                                                @if($test->rol_id == 3)
+                                                <tr>
+                                                    <td>{{ucfirst($user->voornaam)}}</td>
+                                                    <td>{{$user->tussenvoegsel}} {{ucfirst($user->achternaam)}}</td>
+                                                    <td>{{$user->email}}</td>
+                                                    <td><a href="{{url('edit_user',['user'=>$user->id])}}">
+                                                            <button class="btn btn-primary">Wijzigen</button>
+                                                        </a></td>
+                                                    <td>
+                                                        <button class="btn btn-danger">Verwijderen</button>
+                                                    </td>
+                                                </tr>
+                                                @endif
+                                            @endforeach
+                                        @endforeach
+                                        <tr>
+                                            <td><a href="{{url('/new_user')}}">
+                                                    <button class="btn btn-success">+ nieuw</button>
+                                                </a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
-                                        ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
-                                        recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium
-                                        consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/2.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>March 2011</h4>
-                                    <h4 class="subheading">An Agency is Born</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
-                                        ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
-                                        recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium
-                                        consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/3.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>December 2012</h4>
-                                    <h4 class="subheading">Transition to Full Service</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
-                                        ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
-                                        recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium
-                                        consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/4.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>July 2014</h4>
-                                    <h4 class="subheading">Phase Two Expansion</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
-                                        ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
-                                        recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium
-                                        consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <h4>Be Part
-                                    <br>Of Our
-                                    <br>Story!</h4>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Services Section -->
-    <section id="services">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Acties</h2>
-                    <h3 class="section-subheading text-muted">Huidig lopende acties.</h3>
-                </div>
-            </div>
-            <div class="row text-center">
-                @foreach($lespakketten as $lespakket)
-                    @if($lespakket->actie)
-                        <div class="col-md-3 col-sm-4 portfolio-item">
-                            <a href="#{{$lespakket->toVoertuigType->lestype}}modal" class="portfolio-link"
-                               data-toggle="modal">
-                                <img src="img/portfolio/{{$lespakket->toVoertuigType->lestype}}.jpg"
-                                     class="img-responsive"
-                                     alt="">
-                            </a>
-                            <div class="portfolio-caption">
-                                <h4>{{$lespakket->lespakket}} ({{$lespakket->actie}}%)</h4>
                             </div>
                         </div>
-                    @endif
-                @endforeach
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Grid Section -->
-    <section id="portfolio" class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Lespakketten</h2>
-                    <h3 class="section-subheading text-muted">Huidige lespakketten aanbod.</h3>
-                </div>
-            </div>
-            <div class="row">
-                @foreach($lespakketten as $lespakket)
-                    <div class="col-md-4 col-sm-6 portfolio-item">
-                        <a href="#{{$lespakket->toVoertuigType->lestype}}modal" class="portfolio-link"
-                           data-toggle="modal">
-                            <div class="portfolio-hover">
-                                <div class="portfolio-hover-content">
-                                    <i class="fa fa-search fa-3x"></i>
-                                </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                       href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Medewerkers
+                                    </a>
+                                </h4>
                             </div>
-                            <img src="img/portfolio/{{$lespakket->toVoertuigType->lestype}}.jpg" class="img-responsive"
-                                 alt="">
-                        </a>
-                        <div class="portfolio-caption">
-                            <h4>{{$lespakket->lespakket}}
-                                @if($lespakket->actie)
-                                    ({{$lespakket->actie}}%)
-                                @endif
-                            </h4>
-                            <p class="text-muted">Graphic Design</p>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                                 aria-labelledby="headingTwo">
+                                <div class="panel-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Voornaam</th>
+                                            <th>Achternaam</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($users as $user)
+                                            @foreach($user->toRol as $test)
+                                                @if($test->rol_id != 3)
+                                                    <tr>
+                                                        <td>{{ucfirst($user->voornaam)}}</td>
+                                                        <td>{{$user->tussenvoegsel}} {{ucfirst($user->achternaam)}}</td>
+                                                        <td>{{$user->email}}</td>
+                                                        <td><a href="{{url('edit_employee',['user'=>$user->id])}}">
+                                                                <button class="btn btn-primary">Wijzigen</button>
+                                                            </a></td>
+                                                        <td>
+                                                            <button class="btn btn-danger">Verwijderen</button>
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" {{$user->hasRole(1)? "checked" : ""}} >
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" {{$user->hasRole(2)? "checked" : ""}} >
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" {{$user->hasRole(3)? "checked" : ""}} >
+                                                        </td>
 
-    <!-- Team Section -->
-    <section id="team">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Our Amazing Team</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Kay Garland</h4>
-                        <p class="text-muted">Lead Designer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/2.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Larry Parker</h4>
-                        <p class="text-muted">Lead Marketer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/3.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Diana Pertersen</h4>
-                        <p class="text-muted">Lead Developer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque,
-                        laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Contact Us</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <form name="sentMessage" id="contactForm" novalidate>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Your Name *" id="name" required
-                                           data-validation-required-message="Please enter your name.">
-                                    <p class="help-block text-danger"></p>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                        @endforeach
+                                        <tr>
+                                            <td><a href="{{url('/new_employee')}}">
+                                                    <button class="btn btn-success">+ nieuw</button>
+                                                </a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Your Email *" id="email"
-                                           required data-validation-required-message="Please enter your email address.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="form-group">
-                                    <input type="tel" class="form-control" placeholder="Your Phone *" id="phone"
-                                           required data-validation-required-message="Please enter your phone number.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <textarea class="form-control" placeholder="Your Message *" id="message" required
-                                              data-validation-required-message="Please enter a message."></textarea>
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-lg-12 text-center">
-                                <div id="success"></div>
-                                <button type="submit" class="btn btn-xl">Send Message</button>
                             </div>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <span class="copyright">Copyright &copy; Your Website 2016</span>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline social-buttons">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline quicklinks">
-                        <li><a href="#">Privacy Policy</a>
-                        </li>
-                        <li><a href="#">Terms of Use</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Portfolio Modals -->
-    <!-- Use the modals below to showcase details about your portfolio projects! -->
-
-    @foreach($lespakketten as $lespakket)
-        <!-- Portfolio Modal 1 -->
-        <div class="portfolio-modal modal fade" id="{{$lespakket->toVoertuigType->lestype}}modal" tabindex="-1"
-             role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="close-modal" data-dismiss="modal">
-                        <div class="lr">
-                            <div class="rl">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingThree">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                       href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Voertuigen
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                                 aria-labelledby="headingThree">
+                                <div class="panel-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Voertuig</th>
+                                            <th>Kenteken</th>
+                                            <th>Merk</th>
+                                            <th>Aankopdatum</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($voertuigen as $voertuig)
+                                            <tr>
+                                                <td>{{ucfirst($voertuig->toVoertuigtype->lestype)}}</td>
+                                                <td>{{$voertuig->kenteken}}</td>
+                                                <td>{{ucfirst($voertuig->merk)}}</td>
+                                                <td>{{$voertuig->aankoopdatum}}</td>
+                                                <td>
+                                                    <a href="{{url('edit_voertuig',['voertuig'=>$voertuig->kenteken])}}">
+                                                        <button class="btn btn-primary">Wijzigen</button>
+                                                    </a></td>
+                                                <td>
+                                                    <button class="btn btn-danger">Verwijderen</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        <tr>
+                                            <td><a href="{{url('/new_voertuig')}}">
+                                                    <button class="btn btn-success">+ nieuw</button>
+                                                </a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-8 col-lg-offset-2">
-                                <div class="modal-body">
-                                    <!-- Project Details Go Here -->
-                                    <h2>{{$lespakket->lespakket}}</h2>
-                                    <h3>
-                                        @if($lespakket->actie)
-                                            &#8364; {{$lespakket->toLesPrijs->prijs}} -
-                                            {{$lespakket->actie}}% =<br>
-                                            &#8364; {{($lespakket->toLesPrijs->prijs / 100) * (100-$lespakket->actie)}}
-                                        @else
-                                            &#8364; {{$lespakket->toLesPrijs->prijs}}
-                                        @endif
-                                    </h3>
-                                    <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-responsive img-centered" src="img/portfolio/roundicons-free.png"
-                                         alt="">
-                                    <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
-                                        adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos
-                                        deserunt
-                                        repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores
-                                        repudiandae,
-                                        nostrum, reiciendis facere nemo!</p>
-                                    <p>
-                                        <strong>Want these icons in this portfolio item sample?</strong>You can download
-                                        60
-                                        of them for free, courtesy of <a
-                                                href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">RoundIcons.com</a>,
-                                        or you can purchase the 1500 icon set <a
-                                                href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">here</a>.
-                                    </p>
-                                    <ul class="list-inline">
-                                        <li>Date: July 2014</li>
-                                        <li>Client: Round Icons</li>
-                                        <li>Category: Graphic Design</li>
-                                    </ul>
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i
-                                                class="fa fa-times"></i> Close Project
-                                    </button>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingFour">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                       href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        Lespakketten
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
+                                 aria-labelledby="headingFour">
+                                <div class="panel-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Lespakket</th>
+                                            <th>Lessen aantal</th>
+                                            <th>actie</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($lespakketten as $lespakket)
+                                            <tr>
+                                                <td>{{ucfirst($lespakket->lespakket)}}</td>
+                                                <td>{{$lespakket->lessenaantal}}</td>
+                                                <td>{{$lespakket->actie}}</td>
+                                                <td>
+                                                    <a href="{{url('edit_lespakket',['lespakket'=>$lespakket->lespakket_id])}}">
+                                                        <button class="btn btn-primary">Wijzigen</button>
+                                                    </a></td>
+                                                <td>
+                                                    <button class="btn btn-danger">Verwijderen</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        <tr>
+                                            <td><a href="{{url('/new_lespakket')}}">
+                                                    <button class="btn btn-success">+ nieuw</button>
+                                                </a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingFive">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                       href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                        Vakanties en Feestdagen
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseFive" class="panel-collapse collapse" role="tabpanel"
+                                 aria-labelledby="headingFive">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                    richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
+                                    brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                    aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente
+                                    ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
+                                    farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them
+                                    accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingSix">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                       href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                        Reparatieonderdelen
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseSix" class="panel-collapse collapse" role="tabpanel"
+                                 aria-labelledby="headingSix">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                    richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
+                                    brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                    aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente
+                                    ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
+                                    farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them
+                                    accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingSeven">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                                       href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                        Info
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel"
+                                 aria-labelledby="headingSeven">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                    richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
+                                    brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                                    aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente
+                                    ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
+                                    farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them
+                                    accusamus labore sustainable VHS.
                                 </div>
                             </div>
                         </div>
@@ -373,5 +289,5 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    </section>
 @endsection

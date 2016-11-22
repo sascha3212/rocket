@@ -5,105 +5,13 @@
     <header id="page-top">
         <div class="container">
             <div class="intro-text">
-                <div class="intro-lead-in">Welcome To Our Studio!</div>
-                <div class="intro-heading">It's Nice To Meet You</div>
-                <a href="#services" class="page-scroll btn btn-xl">Tell Me More</a>
+                <div class="intro-lead-in">Alle erkende en onbekende rijopleidingen</div>
+                <div class="intro-heading">Welkom bij Rijschool Rocket</div>
+                <a href="#services" class="page-scroll btn btn-xl">Neem een kijkje!</a>
             </div>
         </div>
     </header>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Informatie</h2>
-                    <h3 class="section-subheading text-muted">Een samenvatting van het begin van onze rijschool.</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="timeline">
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/1.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>2009-2011</h4>
-                                    <h4 class="subheading">Our Humble Beginnings</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
-                                        ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
-                                        recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium
-                                        consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/2.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>March 2011</h4>
-                                    <h4 class="subheading">An Agency is Born</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
-                                        ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
-                                        recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium
-                                        consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/3.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>December 2012</h4>
-                                    <h4 class="subheading">Transition to Full Service</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
-                                        ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
-                                        recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium
-                                        consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="img/about/4.jpg" alt="">
-                            </div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>July 2014</h4>
-                                    <h4 class="subheading">Phase Two Expansion</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
-                                        ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam,
-                                        recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium
-                                        consectetur!</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline-inverted">
-                            <div class="timeline-image">
-                                <h4>Be Part
-                                    <br>Of Our
-                                    <br>Story!</h4>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- Services Section -->
     <section id="services">
         <div class="container">
@@ -117,7 +25,7 @@
                 @foreach($lespakketten as $lespakket)
                     @if($lespakket->actie)
                         <div class="col-md-3 col-sm-4 portfolio-item">
-                            <a href="#{{$lespakket->toVoertuigType->lestype}}modal" class="portfolio-link"
+                            <a href="#{{$lespakket->lespakket_id}}modal" class="portfolio-link"
                                data-toggle="modal">
                                 <img src="img/portfolio/{{$lespakket->toVoertuigType->lestype}}.jpg"
                                      class="img-responsive"
@@ -145,7 +53,7 @@
             <div class="row">
                 @foreach($lespakketten as $lespakket)
                     <div class="col-md-4 col-sm-6 portfolio-item">
-                        <a href="#{{$lespakket->toVoertuigType->lestype}}modal" class="portfolio-link"
+                        <a href="#{{$lespakket->lespakket_id}}modal" class="portfolio-link"
                            data-toggle="modal">
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content">
@@ -174,62 +82,38 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Our Amazing Team</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h2 class="section-heading">Instructeurs</h2>
+                    <h3 class="section-subheading text-muted">Deze medewerkens helpen u naar een rijbewijs!</h3>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Kay Garland</h4>
-                        <p class="text-muted">Lead Designer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/2.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Larry Parker</h4>
-                        <p class="text-muted">Lead Marketer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/3.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Diana Pertersen</h4>
-                        <p class="text-muted">Lead Developer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque,
-                        laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
-                </div>
+                @foreach($users as $user)
+                    @foreach($user->toRol as $instructeur)
+                        @if($instructeur->rol_id == 2)
+                            <div class="col-sm-4">
+                                <div class="team-member">
+                                    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQaGbnh2l13okMdLVydJ2gL94jxnGZjjBgYmUGqx7h7TB3UL655Vw"
+                                         class="img-responsive img-circle" alt="">
+                                    <h4>{{$user->voornaam}} {{$user->achternaam}}</h4>
+                                    <p class="text-muted">(
+                                        @foreach($user->toLicentie as $type)
+                                            {{ucfirst($type->lestype)}}
+                                        @endforeach
+                                        ) intructeur</p>
+
+                                    <ul class="list-inline social-buttons">
+                                        <li><a href=""><i class="fa fa-twitter"></i></a>
+                                        </li>
+                                        <li><a href=""><i class="fa fa-facebook"></i></a>
+                                        </li>
+                                        <li><a href=""><i class="fa fa-linkedin"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                @endforeach
             </div>
         </div>
     </section>
@@ -316,7 +200,7 @@
 
     @foreach($lespakketten as $lespakket)
         <!-- Portfolio Modal 1 -->
-        <div class="portfolio-modal modal fade" id="{{$lespakket->toVoertuigType->lestype}}modal" tabindex="-1"
+        <div class="portfolio-modal modal fade" id="{{$lespakket->lespakket_id}}modal" tabindex="-1"
              role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -342,8 +226,6 @@
                                         @endif
                                     </h3>
                                     <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                                    <img class="img-responsive img-centered" src="img/portfolio/roundicons-free.png"
-                                         alt="">
                                     <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
                                         adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos
                                         deserunt

@@ -8,31 +8,32 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Gebruiker gegevens</div>
                         <div class="panel-body">
-                            <form class="form-horizontal" role="form" method="POST" action="{{url('/edit_voertuig')}}">
+                            <form class="form-horizontal" role="form" method="POST" action="{{url('/edit_lespakket')}}">
                                 {{ csrf_field() }}
-
+                                <input id="lespakket_id" type="hidden" name="lespakket_id"
+                                       value="{{ $lespakket->lespakket_id }}" >
                                 <div class="form-group">
-                                    <label for="kenteken" class="col-md-4 control-label">Kenteken</label>
+                                    <label for="lespakket" class="col-md-4 control-label">Lespakket</label>
 
                                     <div class="col-md-6">
-                                        <input id="kenteken" type="text" class="form-control" name="kenteken"
-                                               value="{{ $voertuig->kenteken }}" disabled>
+                                        <input id="lespakket" type="text" class="form-control" name="lespakket"
+                                               value="{{ $lespakket->lespakket }}" autofocus>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="merk" class="col-md-4 control-label">Merk</label>
+                                    <label for="lessenaantal" class="col-md-4 control-label">Lessenaantal</label>
 
                                     <div class="col-md-6">
-                                        <input id="merk" type="text" class="form-control" name="merk"
-                                               value="{{ $voertuig->merk }}" autofocus>
+                                        <input id="lessenaantal" type="number" class="form-control" name="lessenaantal"
+                                               value="{{ $lespakket->lessenaantal }}" autofocus>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="aankoopdatum" class="col-md-4 control-label">Aankoopdatum</label>
+                                    <label for="actie" class="col-md-4 control-label">Actie-percentage</label>
 
                                     <div class="col-md-6">
-                                        <input id="aankoopdatum" type="date" class="form-control" name="aankoopdatum"
-                                               value="{{ $voertuig->aankoopdatum }}" required autofocus>
+                                        <input id="actie" type="nunmber" class="form-control" name="actie"
+                                               value="{{ $lespakket->actie }}" autofocus>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -43,7 +44,7 @@
                                         <select class="form-control" id="voertuigtype_voertuigtype_id"
                                                 name="voertuigtype_voertuigtype_id">
                                             @foreach($voertuigtypes as $voertuigtype)
-                                                <option value="{{$voertuigtype->voertuigtype_id}}" {{$voertuig->voertuigtype_voertuigtype_id === $voertuigtype->voertuigtype_id ? "selected" : ""}}>{{ucfirst($voertuigtype->lestype)}}</option>
+                                                <option value="{{$voertuigtype->voertuigtype_id}}" {{$lespakket->voertuigtype_voertuigtype_id === $voertuigtype->voertuigtype_id ? "selected" : ""}}>{{ucfirst($voertuigtype->lestype)}}</option>
                                             @endforeach
                                         </select>
                                     </div>

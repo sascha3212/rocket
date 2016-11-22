@@ -8,9 +8,20 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Gebruiker gegevens</div>
                         <div class="panel-body">
-                            <form class="form-horizontal" role="form" method="POST" action="{{url('/add_new_user')}}">
+                            <form class="form-horizontal" role="form" method="POST" action="{{url('/edit_employee')}}">
                                 {{ csrf_field() }}
 
+                                <div class="form-group">
+                                    <label for="rol" class="col-md-4 control-label">Rol:</label>
+
+                                    <div class="col-md-6">
+                                        <select class="form-control" id="rol" name="rol">
+                                            @foreach($rollen as $rol)
+                                                <option value="{{$rol->rol_id}}" {{$rol->rol_id == 3 ? "disabled" : ""}} {{$user->toRol[0]->rol_id === $rol->rol_id ? "selected" : ""}}>{{ucfirst($rol->rol)}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="voornaam" class="col-md-4 control-label">Voornaam</label>
 
@@ -144,35 +155,6 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Lespakket(ten)</div>
-                        <div class="panel-body">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>Voertuig</th>
-                                    <th>Lespakket</th>
-                                    <th>Lessen aantal</th>
-                                    <th>Prijs</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @forelse($user->toLespakket as $lespakket)
-                                    <tr>
-                                        <td>{{ucfirst($lespakket->toVoertuigtype->lestype)}}</td>
-                                        <td>{{ucfirst($lespakket->lespakket)}}</td>
-                                        <td>{{$lespakket->lessenaantal}}</td>
-                                        <td>&#8364; {{$lespakket->toLesPrijs->prijs}}</td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td>Nog geen lespaketten</td>
-                                    </tr>
-                                @endforelse
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>

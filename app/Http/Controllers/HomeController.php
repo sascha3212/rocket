@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Roltoekenning;
+use App\User;
 use Illuminate\Http\Request;
 use App\Lespakket;
 use Auth;
@@ -21,8 +23,10 @@ class HomeController extends Controller
     public function index()
     {
         $lespakketten = Lespakket::All();
+        $users = User::all();
         return view('home', [
-            'lespakketten' => $lespakketten
+            'lespakketten' => $lespakketten,
+            'users' => $users
         ]);
     }
 
