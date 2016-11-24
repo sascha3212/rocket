@@ -47,7 +47,7 @@
                                                     <td>{{$user->tussenvoegsel}} {{ucfirst($user->achternaam)}}</td>
                                                     <td>{{$user->email}}</td>
                                                     <td><a href="{{url('edit_user',['user'=>$user->id])}}">
-                                                            <button class="btn btn-primary">Wijzigen</button>
+                                                            <button class="btn btn-primary">Bekijken</button>
                                                         </a></td>
                                                     <td>
                                                         <button class="btn btn-danger">Verwijderen</button>
@@ -95,21 +95,11 @@
                                                         <td>{{$user->tussenvoegsel}} {{ucfirst($user->achternaam)}}</td>
                                                         <td>{{$user->email}}</td>
                                                         <td><a href="{{url('edit_employee',['user'=>$user->id])}}">
-                                                                <button class="btn btn-primary">Wijzigen</button>
+                                                                <button class="btn btn-primary">Bekijken</button>
                                                             </a></td>
                                                         <td>
                                                             <button class="btn btn-danger">Verwijderen</button>
                                                         </td>
-                                                        <td>
-                                                            <input type="checkbox" {{$user->hasRole(1)? "checked" : ""}} >
-                                                        </td>
-                                                        <td>
-                                                            <input type="checkbox" {{$user->hasRole(2)? "checked" : ""}} >
-                                                        </td>
-                                                        <td>
-                                                            <input type="checkbox" {{$user->hasRole(3)? "checked" : ""}} >
-                                                        </td>
-
                                                     </tr>
                                                 @endif
                                             @endforeach
@@ -154,7 +144,7 @@
                                                 <td>{{$voertuig->aankoopdatum}}</td>
                                                 <td>
                                                     <a href="{{url('edit_voertuig',['voertuig'=>$voertuig->kenteken])}}">
-                                                        <button class="btn btn-primary">Wijzigen</button>
+                                                        <button class="btn btn-primary">Bekijken</button>
                                                     </a></td>
                                                 <td>
                                                     <button class="btn btn-danger">Verwijderen</button>

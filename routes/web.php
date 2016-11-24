@@ -10,10 +10,10 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-Auth::routes();
-
-Route::group(['middleware' => 'web'], function () {
+Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'HomeController@index');
+
+    Auth::routes();
 
 });
 
