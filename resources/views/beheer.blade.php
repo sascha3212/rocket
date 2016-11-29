@@ -42,17 +42,17 @@
                                         @foreach($users as $user)
                                             @foreach($user->toRol as $test)
                                                 @if($test->rol_id == 3)
-                                                <tr>
-                                                    <td>{{ucfirst($user->voornaam)}}</td>
-                                                    <td>{{$user->tussenvoegsel}} {{ucfirst($user->achternaam)}}</td>
-                                                    <td>{{$user->email}}</td>
-                                                    <td><a href="{{url('edit_user',['user'=>$user->id])}}">
-                                                            <button class="btn btn-primary">Bekijken</button>
-                                                        </a></td>
-                                                    <td>
-                                                        <button class="btn btn-danger">Verwijderen</button>
-                                                    </td>
-                                                </tr>
+                                                    <tr>
+                                                        <td>{{ucfirst($user->voornaam)}}</td>
+                                                        <td>{{$user->tussenvoegsel}} {{ucfirst($user->achternaam)}}</td>
+                                                        <td>{{$user->email}}</td>
+                                                        <td><a href="{{url('edit_user',['user'=>$user->id])}}">
+                                                                <button class="btn btn-primary">Bekijken</button>
+                                                            </a></td>
+                                                        <td>
+                                                            <button class="btn btn-danger">Verwijderen</button>
+                                                        </td>
+                                                    </tr>
                                                 @endif
                                             @endforeach
                                         @endforeach
@@ -94,9 +94,11 @@
                                                         <td>{{ucfirst($user->voornaam)}}</td>
                                                         <td>{{$user->tussenvoegsel}} {{ucfirst($user->achternaam)}}</td>
                                                         <td>{{$user->email}}</td>
-                                                        <td><a href="{{url('edit_employee',['user'=>$user->id])}}">
+                                                        <td>
+                                                            <a href="{{url('edit_employee',['user'=>$user->id])}}">
                                                                 <button class="btn btn-primary">Bekijken</button>
-                                                            </a></td>
+                                                            </a>
+                                                        </td>
                                                         <td>
                                                             <button class="btn btn-danger">Verwijderen</button>
                                                         </td>

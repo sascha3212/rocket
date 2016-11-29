@@ -60,7 +60,7 @@
                             <a href="#page-top"></a>
                         </li>
                         <li>
-                            <a class="page-scroll" href="#beheer">beheer</a>
+                            <a class="page-scroll" href="{{url('beheer')}}">beheer</a>
                         </li>
                         <li>
                             <a class="page-scroll" href="{{url('logout')}}">Logout</a>

@@ -42,9 +42,10 @@ class AdminController extends Controller
     public function getUser($id)
     {
         $user = User::all()->where('id', $id)->first();
-
+        $instructeurs = User::all();
         return view('edit_user', [
-            'user' => $user
+            'user' => $user,
+            'instructeurs' => $instructeurs
         ]);
     }
 
@@ -59,7 +60,7 @@ class AdminController extends Controller
             User::create($request->all());
         }
 
-        $user = User::where('email', $request->input('email'))->first();
+        $user = User::where('id', $request->input('id'))->first();
         $user->voornaam = $request->input('voornaam');
         $user->tussenvoegsel = $request->input('tussenvoegsel');
         $user->achternaam = $request->input('achternaam');
@@ -74,7 +75,7 @@ class AdminController extends Controller
         $user->password = bcrypt($request->input('password'));
         $user->save();
 
-        return redirect('/beheer');
+        return redirect()->back();
     }
 
     public function insertUser(Request $request)
@@ -111,7 +112,7 @@ class AdminController extends Controller
             User::create($request->all());
         }
 
-        $user = User::where('email', $request->input('email'))->first();
+        $user = User::where('id', $request->input('id'))->first();
         $user->voornaam = $request->input('voornaam');
         $user->tussenvoegsel = $request->input('tussenvoegsel');
         $user->achternaam = $request->input('achternaam');
@@ -127,7 +128,7 @@ class AdminController extends Controller
         $user->save();
 //        $user->toRol()->updateExistingPivot($user->toRol[0]->rol_id, ['rol_rol_id' => $request->get('rol')]);
 
-        return redirect('/beheer');
+        return redirect()->back();
     }
 
     public function insertEmployee(Request $request)
@@ -223,5 +224,18 @@ class AdminController extends Controller
         ]);
 
         return redirect('/beheer');
+    }
+
+    public function insertNewLeeringKlant($user_id, $contract_id, Request $request)
+    {
+        $user = User::where('id', $user_id)->first();
+        if($request->get('instructeur') != ''){
+            $new_instructeur = $request->get('instructeur') ;
+        }else{
+            $new_instructeur = null;
+        }
+        $user->toLespakket()->updateExistingPivot($contract_id, ['instructeur_id' => $new_instructeur ]);
+
+        return redirect()->back();
     }
 }

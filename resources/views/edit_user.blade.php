@@ -4,13 +4,14 @@
     <section id="login">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
+                <div class="col-md-10 col-md-offset-1">
                     <div class="panel panel-default">
                         <div class="panel-heading">Gebruiker gegevens</div>
                         <div class="panel-body">
                             <form class="form-horizontal" role="form" method="POST" action="{{url('/edit_user')}}">
                                 {{ csrf_field() }}
-
+                                <input id="id" type="hidden" class="form-control" name="id"
+                                       value="{{ $user->id }}">
                                 <div class="form-group">
                                     <label for="voornaam" class="col-md-4 control-label">Voornaam</label>
 
@@ -156,16 +157,38 @@
                                     <th>Lespakket</th>
                                     <th>Lessen aantal</th>
                                     <th>Prijs</th>
+                                    <th>Datum</th>
+                                    <th>Instructeur</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @forelse($user->toLespakket as $lespakket)
-                                    <tr>
-                                        <td>{{ucfirst($lespakket->toVoertuigtype->lestype)}}</td>
-                                        <td>{{ucfirst($lespakket->lespakket)}}</td>
-                                        <td>{{$lespakket->lessenaantal}}</td>
-                                        <td>&#8364; {{$lespakket->toLesPrijs->prijs}}</td>
-                                    </tr>
+                                    <form method="POST"
+                                          action="{{url('new_leerling_instructeur',['user_id'=>$user->id,'contract_id'=> $lespakket->lespakket_id])}}">
+                                        {{csrf_field()}}
+                                        <tr>
+                                            <td>{{ucfirst($lespakket->toVoertuigtype->lestype)}}</td>
+                                            <td>{{ucfirst($lespakket->lespakket)}}</td>
+                                            <td>{{$lespakket->lessenaantal}}</td>
+                                            <td>&#8364; {{$lespakket->toLesPrijs->prijs}}</td>
+                                            <td>{{\Carbon\Carbon::parse($lespakket->datum)->format('d-m-Y')}}</td>
+                                            <td>
+                                                <select class="form-control" id="instructeur" name="instructeur">
+                                                    <option value="" selected >Kies</option>
+                                                    @foreach($instructeurs as $instructeur)
+                                                        @if($instructeur->hasRole(2))
+                                                            <option value="{{$instructeur->id}}"{{$lespakket->pivot->instructeur_id == $instructeur->id ? 'selected': ''}}>{{ucfirst($instructeur->voornaam)}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <a>
+                                                    <button type="submit" class="btn btn-primary">Toekennen</button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </form>
                                 @empty
                                     <tr>
                                         <td>Nog geen lespaketten</td>

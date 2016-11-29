@@ -10,10 +10,9 @@
                         <div class="panel-body">
                             <form class="form-horizontal" role="form" method="POST" action="{{url('/edit_employee')}}">
                                 {{ csrf_field() }}
-
+                                <input id="id" type="hidden" class="form-control" name="id" value="{{ $user->id }}" >
                                 <div class="form-group">
                                     <label for="rol" class="col-md-4 control-label">Rol:</label>
-
                                     <div class="col-md-6">
                                         <select class="form-control" id="rol" name="rol">
                                             @foreach($rollen as $rol)

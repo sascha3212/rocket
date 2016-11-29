@@ -27,9 +27,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     //User updates-inserts
     Route::get('/edit_user/{id}',['uses' => 'AdminController@getUser','middleware' => 'roles','roles' => [1,2] ]);
-    Route::get('/edit_user',['uses' => 'AdminController@editUser','middleware' => 'roles','roles' => [1] ]);
+    Route::Post('/edit_user',['uses' => 'AdminController@editUser','middleware' => 'roles','roles' => [1] ]);
     Route::get('/new_user',['uses' => 'AdminController@newUser','middleware' => 'roles','roles' => [1] ]);
-    Route::get('/new_user',['uses' => 'AdminController@insertUser','middleware' => 'roles','roles' => [1] ]);
+    Route::Post('/new_user',['uses' => 'AdminController@insertUser','middleware' => 'roles','roles' => [1] ]);
 
 
     //Employees updates-inserts
@@ -49,4 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::Post('/edit_lespakket',['uses' => 'AdminController@editLespakket','middleware' => 'roles','roles' => [1] ]);
     Route::get('/new_lespakket',['uses' => 'AdminController@newLespakket','middleware' => 'roles','roles' => [1] ]);
     Route::Post('/new_lespakket',['uses' => 'AdminController@insertLespakket','middleware' => 'roles','roles' => [1] ]);
+
+    //leerling met instructeur koppelen
+    Route::Post('/new_leerling_instructeur/{user_id}/{contract_id}',['uses' => 'AdminController@insertNewLeeringKlant','middleware' => 'roles','roles' => [1] ]);
 });

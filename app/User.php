@@ -37,7 +37,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
 
@@ -48,8 +49,10 @@ class User extends Authenticatable
 
     public function toLespakket()
     {
-        return $this->belongsToMany('App\Lespakket', 'contract', 'users_id', 'lespakket_lespakket_id');
+        return $this->belongsToMany('App\Lespakket', 'contract', 'users_id', 'lespakket_lespakket_id')
+            ->withPivot('contract_id','instructeur_id');
     }
+
     public function toRol()
     {
         return $this->belongsToMany('App\Rol', 'roltoekenning', 'users_id', 'rol_rol_id');
@@ -57,13 +60,13 @@ class User extends Authenticatable
 
     public function hasAnyRole($roles)
     {
-        if(is_array($roles)) {
+        if (is_array($roles)) {
             foreach ($roles as $role) {
                 if ($this->hasRole($role)) {
                     return true;
                 }
             }
-        }else{
+        } else {
             if ($this->hasRole($roles)) {
                 return true;
             }
@@ -73,7 +76,7 @@ class User extends Authenticatable
 
     public function hasRole($role)
     {
-        if ($this->toRol()->where("rol_id", $role)->first()){
+        if ($this->toRol()->where("rol_id", $role)->first()) {
             return true;
         }
         return false;
