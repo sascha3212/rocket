@@ -174,10 +174,14 @@
                                             <td>{{\Carbon\Carbon::parse($lespakket->datum)->format('d-m-Y')}}</td>
                                             <td>
                                                 <select class="form-control" id="instructeur" name="instructeur">
-                                                    <option value="" selected >Kies</option>
+                                                    <option value="" selected>Kies</option>
                                                     @foreach($instructeurs as $instructeur)
                                                         @if($instructeur->hasRole(2))
-                                                            <option value="{{$instructeur->id}}"{{$lespakket->pivot->instructeur_id == $instructeur->id ? 'selected': ''}}>{{ucfirst($instructeur->voornaam)}}</option>
+                                                            @foreach($instructeur->toLicentie as $licentie)
+                                                                @if($licentie->voertuigtype_id == $lespakket->voertuigtype_voertuigtype_id)
+                                                                    <option value="{{$instructeur->id}}"{{$lespakket->pivot->instructeur_id == $instructeur->id ? 'selected': ''}}>{{ucfirst($instructeur->voornaam)}}</option>
+                                                                @endif
+                                                            @endforeach
                                                         @endif
                                                     @endforeach
                                                 </select>
@@ -192,6 +196,58 @@
                                 @empty
                                     <tr>
                                         <td>Nog geen lespaketten</td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Betalingen</div>
+                        <div class="panel-body">
+                            <form class="form-inline" method="POST"
+                                  action="{{url('',['user_id'=>$user->id,'contract_id'=> $lespakket->lespakket_id])}}">
+                                {{csrf_field()}}
+                                <select class="form-control" id="instructeur" name="instructeur">
+                                    <option value="" selected>Kies</option>
+                                    @foreach($user->toLespakket as $lespakket)
+                                        <option value="{{$lespakket->lespakket_id}}">{{ucfirst($lespakket->lespakket)}}
+                                            - {{ucfirst($lespakket->toVoertuigType->lestype)}}</option>
+                                    @endforeach
+                                </select>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="bedrag" placeholder="Bedrag">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Toevoegen</button>
+                            </form>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Voertuig</th>
+                                    <th>Lespakket</th>
+                                    <th>Datum</th>
+                                    <th>Bedrag afgelost</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @forelse($user->toBetaling as $betaling)
+                                    <tr>
+                                        <td>
+                                            @foreach($user->toLespakket as $contract)
+                                                @if($contract->pivot->contract_id == $betaling->contract_contract_id)
+                                                    {{ucfirst($contract->toVoertuigType->lestype)}}
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            {{ucfirst($contract->lespakket)}}
+                                        </td>
+                                        <td>{{\Carbon\Carbon::parse($betaling->datum)->format('d-m-Y H:i')}}</td>
+                                        <td>&euro;{{$betaling->bedrag}}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td>Nog geen betalingen</td>
                                     </tr>
                                 @endforelse
                                 </tbody>

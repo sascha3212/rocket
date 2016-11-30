@@ -50,7 +50,12 @@ class User extends Authenticatable
     public function toLespakket()
     {
         return $this->belongsToMany('App\Lespakket', 'contract', 'users_id', 'lespakket_lespakket_id')
-            ->withPivot('contract_id','instructeur_id');
+            ->withPivot('contract_id','instructeur_id','lespakket_lespakket_id');
+    }
+
+    public function toBetaling()
+    {
+        return $this->hasMany('App\Betaling','users_id');
     }
 
     public function toRol()
