@@ -206,17 +206,20 @@
                         <div class="panel-heading">Betalingen</div>
                         <div class="panel-body">
                             <form class="form-inline" method="POST"
-                                  action="{{url('',['user_id'=>$user->id,'contract_id'=> $lespakket->lespakket_id])}}">
+                                  action="{{url('new_betaling',['user_id'=>$user->id])}}">
                                 {{csrf_field()}}
-                                <select class="form-control" id="instructeur" name="instructeur">
-                                    <option value="" selected>Kies</option>
+                                <select class="form-control" id="contract_id" name="contract_id">
+                                    <option selected disabled>lespakket</option>
                                     @foreach($user->toLespakket as $lespakket)
-                                        <option value="{{$lespakket->lespakket_id}}">{{ucfirst($lespakket->lespakket)}}
+                                        <option value="{{$lespakket->pivot->contract_id}}">{{ucfirst($lespakket->lespakket)}}
                                             - {{ucfirst($lespakket->toVoertuigType->lestype)}}</option>
                                     @endforeach
                                 </select>
                                 <div class="form-group">
-                                    <input type="number" class="form-control" id="bedrag" placeholder="Bedrag">
+                                    <input type="text" class="form-control" name="bankrekening" id="bankrekening" placeholder="Rekeningnummer">
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" name="bedrag" id="bedrag" placeholder="Bedrag">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Toevoegen</button>
                             </form>
@@ -226,6 +229,7 @@
                                     <th>Voertuig</th>
                                     <th>Lespakket</th>
                                     <th>Datum</th>
+                                    <th>Rekeningnummer</th>
                                     <th>Bedrag afgelost</th>
                                 </tr>
                                 </thead>
@@ -243,6 +247,7 @@
                                             {{ucfirst($contract->lespakket)}}
                                         </td>
                                         <td>{{\Carbon\Carbon::parse($betaling->datum)->format('d-m-Y H:i')}}</td>
+                                        <td>{{$betaling->bankrekening}}</td>
                                         <td>&euro;{{$betaling->bedrag}}</td>
                                     </tr>
                                 @empty

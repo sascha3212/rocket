@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Betaling;
 use Illuminate\Http\Request;
 use App\User;
 use App\Voertuig;
@@ -235,6 +236,18 @@ class AdminController extends Controller
             $new_instructeur = null;
         }
         $user->toLespakket()->updateExistingPivot($contract_id, ['instructeur_id' => $new_instructeur ]);
+
+        return redirect()->back();
+    }
+
+    public function insertNewBetaling($user_id, Request $request)
+    {
+        $betaling = new Betaling();
+        $betaling->users_id = $user_id;
+        $betaling->bankrekening = $request->get("bankrekening");
+        $betaling->bedrag = $request->get("bedrag");
+        $betaling->contract_contract_id = $request->get("contract_id");
+        $betaling->save();
 
         return redirect()->back();
     }

@@ -52,4 +52,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     //leerling met instructeur koppelen
     Route::Post('/new_leerling_instructeur/{user_id}/{contract_id}',['uses' => 'AdminController@insertNewLeeringKlant','middleware' => 'roles','roles' => [1] ]);
+
+    Route::Post('/new_betaling/{user_id}',['uses' => 'AdminController@insertNewBetaling','middleware' => 'roles','roles' => [1] ]);
 });

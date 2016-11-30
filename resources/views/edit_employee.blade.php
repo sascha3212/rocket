@@ -10,7 +10,7 @@
                         <div class="panel-body">
                             <form class="form-horizontal" role="form" method="POST" action="{{url('/edit_employee')}}">
                                 {{ csrf_field() }}
-                                <input id="id" type="hidden" class="form-control" name="id" value="{{ $user->id }}" >
+                                <input id="id" type="hidden" class="form-control" name="id" value="{{ $user->id }}">
                                 <div class="form-group">
                                     <label for="rol" class="col-md-4 control-label">Rol:</label>
                                     <div class="col-md-6">
@@ -154,6 +154,50 @@
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Licenties</div>
+                        <div class="panel-body">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Startdatum</th>
+                                    <th>Einddatum</th>
+                                    <th>Voertuigtype</th>
+                                    <th>Rijbewijs</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @forelse($user->toLicentie as $licentie)
+                                    <form method="POST"
+                                          action="{{url('delete_licentie',['user_id'=>$user->id])}}">
+                                        {{csrf_field()}}
+                                        <tr>
+                                            <td>{{\Carbon\Carbon::parse($licentie->pivot->startdatum)->format('d-m-Y')}}</td>
+                                            <td>
+                                                @if($licentie->pivot->einddatum != NULL)
+                                                    {{\Carbon\Carbon::parse($licentie->pivot->einddatum)->format('d-m-Y')}}
+                                                @else
+                                                    n.v.t.
+                                                @endif
+                                            </td>
+                                            <td>{{ucfirst($licentie->lestype)}}</td>
+                                            <td>{{$licentie->rijbewijs}}</td>
+                                            <td>
+                                                <a>
+                                                    <button type="submit" class="btn btn-danger">Verwijder</button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </form>
+                                @empty
+                                    <tr>
+                                        <td>Nog geen lespaketten</td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

@@ -44,7 +44,8 @@ class User extends Authenticatable
 
     public function toLicentie()
     {
-        return $this->belongsToMany('App\Voertuigtype', 'licentie', 'users_id', 'voertuigtype_voertuigtype_id');
+        return $this->belongsToMany('App\Voertuigtype', 'licentie', 'users_id', 'voertuigtype_voertuigtype_id')
+            ->withPivot('startdatum','einddatum');
     }
 
     public function toLespakket()
