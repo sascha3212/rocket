@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Betaling;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\User;
 use App\Voertuig;
@@ -92,10 +93,12 @@ class AdminController extends Controller
     {
         $user = User::all()->where('id', $id)->first();
         $rollen = Rol::all();
+        $voertuigtypes = Voertuigtype::all();
 
         return view('edit_employee', [
             'user' => $user,
-            'rollen' => $rollen
+            'rollen' => $rollen,
+            'voertuigtypes' => $voertuigtypes
         ]);
     }
 
@@ -127,7 +130,7 @@ class AdminController extends Controller
         $user->username = $request->input('username');
         $user->password = bcrypt($request->input('password'));
         $user->save();
-//        $user->toRol()->updateExistingPivot($user->toRol[0]->rol_id, ['rol_rol_id' => $request->get('rol')]);
+        $user->toRol()->updateExistingPivot($user->toRol[0]->rol_id, ['rol_rol_id' => $request->get('rol')]);
 
         return redirect()->back();
     }
@@ -230,12 +233,12 @@ class AdminController extends Controller
     public function insertNewLeeringKlant($user_id, $contract_id, Request $request)
     {
         $user = User::where('id', $user_id)->first();
-        if($request->get('instructeur') != ''){
-            $new_instructeur = $request->get('instructeur') ;
-        }else{
+        if ($request->get('instructeur') != '') {
+            $new_instructeur = $request->get('instructeur');
+        } else {
             $new_instructeur = null;
         }
-        $user->toLespakket()->updateExistingPivot($contract_id, ['instructeur_id' => $new_instructeur ]);
+        $user->toLespakket()->updateExistingPivot($contract_id, ['instructeur_id' => $new_instructeur]);
 
         return redirect()->back();
     }
@@ -248,6 +251,23 @@ class AdminController extends Controller
         $betaling->bedrag = $request->get("bedrag");
         $betaling->contract_contract_id = $request->get("contract_id");
         $betaling->save();
+
+        return redirect()->back();
+    }
+
+    public function insertNewLicentie($user_id, Request $request)
+    {
+
+        $user = User::where("id", $user_id)->first();
+
+        if($request->get('einddatum') != ''){
+            $einddatum = Carbon::parse($request->get('einddatum'))->format('Y-m-d');
+        }else{
+            $einddatum = null;
+        }
+        $begindatum = Carbon::parse($request->get('begindatum'))->format('Y-m-d');
+
+        $user->toLicentie()->attach($request->get('voertuigtype_id'), ['startdatum'=>$begindatum, 'einddatum'=> $einddatum]);
 
         return redirect()->back();
     }

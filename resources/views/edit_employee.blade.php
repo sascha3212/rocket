@@ -159,6 +159,23 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">Licenties</div>
                         <div class="panel-body">
+                            <form class="form-inline" method="POST"
+                                  action="{{url('new_licentie',['user_id'=>$user->id])}}">
+                                {{csrf_field()}}
+                                <select class="form-control" id="voertuigtype_id" name="voertuigtype_id">
+                                    <option selected disabled>Voertuig</option>
+                                    @foreach($voertuigtypes as $voertuigtype)
+                                        <option value="{{$voertuigtype->voertuigtype_id}}">{{ucfirst($voertuigtype->lestype)}}</option>
+                                    @endforeach
+                                </select>
+                                <div class="form-group">
+                                        <input type="date" class="form-control" name="begindatum" id="begindatum" value="{{\Carbon\Carbon::parse(\Carbon\Carbon::now())->format('d-m-Y')}}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" class="form-control" name="einddatum" id="einddatum" placeholder="Einddatum">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Toevoegen</button>
+                            </form>
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
@@ -193,7 +210,7 @@
                                     </form>
                                 @empty
                                     <tr>
-                                        <td>Nog geen lespaketten</td>
+                                        <td>Nog geen licenties</td>
                                     </tr>
                                 @endforelse
                                 </tbody>
