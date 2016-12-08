@@ -58,4 +58,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Licentie Invoeren
     Route::Post('/new_licentie/{user_id}',['uses' => 'AdminController@insertNewLicentie','middleware' => 'roles','roles' => [1] ]);
+
+    //Voertuig aan Instructeur invoeren
+    Route::Post('/new_user_voertuig/{user_id}',['uses' => 'AdminController@insertNewUserVoertuig','middleware' => 'roles','roles' => [1] ]);
+
+    //Voertuig aan Instructeur invoeren
+    Route::Post('/new_user_absentie/{user_id}',['uses' => 'AdminController@insertNewUserAbsentie','middleware' => 'roles','roles' => [1] ]);
+
 });

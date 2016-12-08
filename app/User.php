@@ -64,6 +64,17 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Rol', 'roltoekenning', 'users_id', 'rol_rol_id');
     }
 
+    public function toVoertuiggebruiker()
+    {
+        return $this->belongsToMany('App\Voertuig', 'voertuiggebruiker', 'users_id', 'voertuig_kenteken')
+            ->withPivot('startdatum','einddatum');
+    }
+
+    public function toAbsentie()
+    {
+        return $this->belongsToMany('App\Absentietype', 'absentie', 'users_id', 'absentietype_absentietype_id')
+            ->withPivot('startdatum','einddatum','notitie');
+    }
     public function hasAnyRole($roles)
     {
         if (is_array($roles)) {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Absentietype;
 use App\Betaling;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -94,11 +95,15 @@ class AdminController extends Controller
         $user = User::all()->where('id', $id)->first();
         $rollen = Rol::all();
         $voertuigtypes = Voertuigtype::all();
+        $voertuigen = Voertuig::all();
+        $absentietype = Absentietype::all();
 
         return view('edit_employee', [
             'user' => $user,
             'rollen' => $rollen,
-            'voertuigtypes' => $voertuigtypes
+            'voertuigtypes' => $voertuigtypes,
+            'voertuigen' => $voertuigen,
+            'absentietypes' => $absentietype
         ]);
     }
 
@@ -260,14 +265,44 @@ class AdminController extends Controller
 
         $user = User::where("id", $user_id)->first();
 
-        if($request->get('einddatum') != ''){
+        if ($request->get('einddatum') != '') {
             $einddatum = Carbon::parse($request->get('einddatum'))->format('Y-m-d');
-        }else{
+        } else {
             $einddatum = null;
         }
         $begindatum = Carbon::parse($request->get('begindatum'))->format('Y-m-d');
 
-        $user->toLicentie()->attach($request->get('voertuigtype_id'), ['startdatum'=>$begindatum, 'einddatum'=> $einddatum]);
+        $user->toLicentie()->attach($request->get('voertuigtype_id'), ['startdatum' => $begindatum, 'einddatum' => $einddatum]);
+
+        return redirect()->back();
+    }
+
+    public function insertNewUserVoertuig($user_id, Request $request)
+    {
+
+        $user = User::where("id", $user_id)->first();
+
+        if ($request->get('einddatum') != '') {
+            $einddatum = Carbon::parse($request->get('einddatum'))->format('Y-m-d');
+        } else {
+            $einddatum = null;
+        }
+        $begindatum = Carbon::parse($request->get('begindatum'))->format('Y-m-d');
+
+        $user->toVoertuiggebruiker()->attach($request->get('voertuig_kenteken'), ['startdatum' => $begindatum, 'einddatum' => $einddatum]);
+
+        return redirect()->back();
+    }
+
+    public function insertNewUserAbsentie($user_id, Request $request)
+    {
+
+        $user = User::where("id", $user_id)->first();
+
+        $begindatum = Carbon::parse($request->get('begindatum'))->format('Y-m-d');
+        $einddatum = Carbon::parse($request->get('einddatum'))->format('Y-m-d');
+
+        $user->toAbsentie()->attach($request->get('absentietype_absentietype_id'), ['startdatum' => $begindatum, 'einddatum' => $einddatum, 'notitie' => $request->get('notitie')]);
 
         return redirect()->back();
     }

@@ -4,7 +4,7 @@
     <section id="login">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
+                <div class="col-md-10 col-md-offset-1">
                     <div class="panel panel-default">
                         <div class="panel-heading">Gebruiker gegevens</div>
                         <div class="panel-body">
@@ -163,16 +163,18 @@
                                   action="{{url('new_licentie',['user_id'=>$user->id])}}">
                                 {{csrf_field()}}
                                 <select class="form-control" id="voertuigtype_id" name="voertuigtype_id">
-                                    <option selected disabled>Voertuig</option>
+                                    <option selected disabled>Voertuigtype</option>
                                     @foreach($voertuigtypes as $voertuigtype)
                                         <option value="{{$voertuigtype->voertuigtype_id}}">{{ucfirst($voertuigtype->lestype)}}</option>
                                     @endforeach
                                 </select>
                                 <div class="form-group">
-                                        <input type="date" class="form-control" name="begindatum" id="begindatum" value="{{\Carbon\Carbon::parse(\Carbon\Carbon::now())->format('d-m-Y')}}">
+                                    <input type="date" class="form-control" name="begindatum" id="begindatum"
+                                           value="{{\Carbon\Carbon::parse(\Carbon\Carbon::now())->format('d-m-Y')}}">
                                 </div>
                                 <div class="form-group">
-                                    <input type="date" class="form-control" name="einddatum" id="einddatum" placeholder="Einddatum">
+                                    <input type="date" class="form-control" name="einddatum" id="einddatum"
+                                           placeholder="Einddatum">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Toevoegen</button>
                             </form>
@@ -211,6 +213,142 @@
                                 @empty
                                     <tr>
                                         <td>Nog geen licenties</td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Voertuigen</div>
+                        <div class="panel-body">
+                            <form class="form-inline" method="POST"
+                                  action="{{url('new_user_voertuig',['user_id'=>$user->id])}}">
+                                {{csrf_field()}}
+                                <select class="form-control" id="voertuig_kenteken" name="voertuig_kenteken">
+                                    <option selected disabled>Voertuig</option>
+                                    {{--Haalt alle voertuigen op en checkt of de instructeur de uiste licentie heeft voor dit voertuig--}}
+                                    @foreach($voertuigen as $voertuig)
+                                        @foreach($user->toLicentie as $licentie)
+                                            @if($voertuig->toVoertuigtype->lestype === $licentie->lestype)
+                                                <option value="{{$voertuig->kenteken}}">{{ucfirst($voertuig->toVoertuigtype->lestype)}}
+                                                    - {{ucfirst($voertuig->kenteken)}}</option>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
+                                </select>
+                                <div class="form-group">
+                                    <input type="date" class="form-control" name="begindatum" id="begindatum"
+                                           value="{{\Carbon\Carbon::parse(\Carbon\Carbon::now())->format('d-m-Y')}}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" class="form-control" name="einddatum" id="einddatum"
+                                           placeholder="Einddatum">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Toevoegen</button>
+                            </form>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Voertuigtype</th>
+                                    <th>Kenteken</th>
+                                    <th>Startdatum</th>
+                                    <th>Einddatum</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @forelse($user->toVoertuiggebruiker as $voertuiggebruiker)
+                                    <form method="POST"
+                                          action="{{url('delete_user_voertuig',['user_id'=>$user->id])}}">
+                                        {{csrf_field()}}
+                                        <tr>
+                                            <td>{{ucfirst($voertuiggebruiker->toVoertuigtype->lestype)}}</td>
+                                            <td>{{$voertuiggebruiker->kenteken}}</td>
+                                            <td>{{\Carbon\Carbon::parse($voertuiggebruiker->pivot->startdatum)->format('d-m-Y')}}</td>
+                                            <td>
+                                                @if($voertuiggebruiker->pivot->einddatum != NULL)
+                                                    {{\Carbon\Carbon::parse($voertuiggebruiker->pivot->einddatum)->format('d-m-Y')}}
+                                                @else
+                                                    n.v.t.
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a>
+                                                    <button type="submit" class="btn btn-danger">Verwijder</button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </form>
+                                @empty
+                                    <tr>
+                                        <td>Nog geen toegekende voertuigen</td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Absentie</div>
+                        <div class="panel-body">
+                            <form class="form-inline" method="POST"
+                                  action="{{url('new_user_absentie',['user_id'=>$user->id])}}">
+                                {{csrf_field()}}
+                                <select class="form-control" id="voertuig_kenteken" name="voertuig_kenteken">
+                                    <option selected disabled>Absentietype</option>
+                                    @foreach($absentietypes as $absentietype)
+                                        <option value="{{$absentietype->kenteken}}">{{ucfirst($absentietype->absentietype)}}</option>
+                                    @endforeach
+                                </select>
+                                <div class="form-group">
+                                    <input type="date" class="form-control" name="begindatum" id="begindatum"
+                                           value="{{\Carbon\Carbon::parse(\Carbon\Carbon::now())->format('d-m-Y')}}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="date" class="form-control" name="einddatum" id="einddatum"
+                                           placeholder="Einddatum">
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" name="notitie" id="notitie"
+                                           placeholder="Notitie"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Toevoegen</button>
+                            </form>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Voertuigtype</th>
+                                    <th>Kenteken</th>
+                                    <th>Startdatum</th>
+                                    <th>Einddatum</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @forelse($user->toVoertuiggebruiker as $voertuiggebruiker)
+                                    <form method="POST"
+                                          action="{{url('delete_user_voertuig',['user_id'=>$user->id])}}">
+                                        {{csrf_field()}}
+                                        <tr>
+                                            <td>{{ucfirst($voertuiggebruiker->toVoertuigtype->lestype)}}</td>
+                                            <td>{{$voertuiggebruiker->kenteken}}</td>
+                                            <td>{{\Carbon\Carbon::parse($voertuiggebruiker->pivot->startdatum)->format('d-m-Y')}}</td>
+                                            <td>
+                                                @if($voertuiggebruiker->pivot->einddatum != NULL)
+                                                    {{\Carbon\Carbon::parse($voertuiggebruiker->pivot->einddatum)->format('d-m-Y')}}
+                                                @else
+                                                    n.v.t.
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a>
+                                                    <button type="submit" class="btn btn-danger">Verwijder</button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </form>
+                                @empty
+                                    <tr>
+                                        <td>Nog geen toegekende voertuigen</td>
                                     </tr>
                                 @endforelse
                                 </tbody>
