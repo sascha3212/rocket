@@ -1,0 +1,9 @@
+INSERT INTO rocket.roltoekenning (startdatum, einddatum, users_id, rol_rol_id) VALUES ('2016-10-29', null, 2, 1);
+INSERT INTO rocket.roltoekenning (startdatum, einddatum, users_id, rol_rol_id) VALUES ('2016-10-30', null, 3, 2);
+INSERT INTO rocket.roltoekenning (startdatum, einddatum, users_id, rol_rol_id) VALUES ('2016-10-31', null, 4, 3);
+INSERT INTO rocket.roltoekenning (startdatum, einddatum, users_id, rol_rol_id) VALUES ('2016-11-01', null, 35, 3);
+INSERT INTO rocket.roltoekenning (startdatum, einddatum, users_id, rol_rol_id) VALUES ('2016-11-02', null, 33, 3);
+INSERT INTO rocket.roltoekenning (startdatum, einddatum, users_id, rol_rol_id) VALUES ('2016-11-03', null, 30, 3);
+INSERT INTO rocket.roltoekenning (startdatum, einddatum, users_id, rol_rol_id) VALUES ('2016-11-04', null, 5, 3);
+INSERT INTO rocket.roltoekenning (startdatum, einddatum, users_id, rol_rol_id) VALUES ('2016-11-05', null, 7, 2);
+INSERT INTO rocket.roltoekenning (startdatum, einddatum, users_id, rol_rol_id) VALUES ('2016-11-06', null, 36, 3);
