@@ -1,1 +1,0 @@
-INSERT INTO rocket.feestdag (datum, einddatum, feestdag, notitie) VALUES ('2016-12-05', '2016-12-06', 'Sinterklaas', '');

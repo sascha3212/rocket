@@ -1,1 +1,0 @@
-INSERT INTO rocket.voertuiggebruiker (startdatum, einddatum, users_id, voertuig_kenteken) VALUES ('2016-12-08', null, 3, 'XD-XD-69');

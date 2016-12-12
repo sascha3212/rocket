@@ -1,2 +1,0 @@
-INSERT INTO rocket.contract (datum, notitie, lespakket_lespakket_id, users_id, instructeur_id) VALUES ('2016-10-31 00:00:00', null, 1, 4, 7);
-INSERT INTO rocket.contract (datum, notitie, lespakket_lespakket_id, users_id, instructeur_id) VALUES ('2016-10-31 14:43:35', null, 4, 4, 3);

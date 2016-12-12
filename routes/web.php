@@ -65,4 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
     //Voertuig aan Instructeur invoeren
     Route::Post('/new_user_absentie/{user_id}',['uses' => 'AdminController@insertNewUserAbsentie','middleware' => 'roles','roles' => [1] ]);
 
+    Route::get('/adminer',['uses' => 'AdminController@newLespakket','middleware' => 'roles','roles' => [1,2,3] ]);
+
+
 });

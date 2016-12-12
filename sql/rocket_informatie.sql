@@ -1,2 +1,0 @@
-INSERT INTO rocket.informatie (titel, image, informatie, nieuws, startdatum, einddatum) VALUES ('De gestolen banden', null, 'Op 1 Januari 2016 zijn er 20 autobanden gestolen, wie heeft dit gedaan?', 0, '2016-01-01', '2020-08-23');
-INSERT INTO rocket.informatie (titel, image, informatie, nieuws, startdatum, einddatum) VALUES ('Rijschool rocket gekozen tot de beste van Nederland', null, 'Uit de test is gebleken dat Rocket Rijschool de beste rijschool van nederland is', 1, '2016-11-04', '2017-05-05');
