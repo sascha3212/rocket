@@ -58,6 +58,52 @@
                             </form>
                         </div>
                     </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Onderhoudsbeurt(en)</div>
+                        <div class="panel-body">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Startdatum</th>
+                                    <th>Einddatum</th>
+                                    <th>Dagen</th>
+                                    <th>KM stand</th>
+                                    <th>Uurkosten</th>
+                                    <th>Garage</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @forelse($voertuig->toOnderhoudsbeurt as $onderhoudsbeurt)
+                                    <form method="POST"
+                                          action="{{url('new_leerling_instructeur',['user_id'=>$user->id,'contract_id'=> $lespakket->lespakket_id])}}">
+                                        {{csrf_field()}}
+                                        <tr>
+                                            <td>{{\Carbon\Carbon::parse($onderhoudsbeurt->pivot->begindatum)->format('d-m-Y')}}</td>
+                                            <td>{{\Carbon\Carbon::parse($onderhoudsbeurt->pivot->einddatum)->format('d-m-Y')}}</td>
+                                            <td>0</td>
+                                            <td>{{$onderhoudsbeurt->pivot->km-stand}}</td>
+                                            <td>{{$onderhoudsbeurt->pivot->arbeidsloon}}</td>
+                                            <td>
+                                                <select class="form-control" id="instructeur" name="instructeur">
+                                                    <option value="" selected>Kies</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <a>
+                                                    <button type="submit" class="btn btn-primary">Toekennen</button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </form>
+                                @empty
+                                    <tr>
+                                        <td>Nog geen onderhoudsbeurt</td>
+                                    </tr>
+                                @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

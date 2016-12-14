@@ -294,14 +294,14 @@
                             <form class="form-inline" method="POST"
                                   action="{{url('new_user_absentie',['user_id'=>$user->id])}}">
                                 {{csrf_field()}}
-                                <select class="form-control" id="voertuig_kenteken" name="voertuig_kenteken">
+                                <select class="form-control" id="absentietype_absentietype_id" name="absentietype_absentietype_id">
                                     <option selected disabled>Absentietype</option>
                                     @foreach($absentietypes as $absentietype)
-                                        <option value="{{$absentietype->kenteken}}">{{ucfirst($absentietype->absentietype)}}</option>
+                                        <option value="{{$absentietype->absentietype_id}}">{{ucfirst($absentietype->absentietype)}}</option>
                                     @endforeach
                                 </select>
                                 <div class="form-group">
-                                    <input type="date" class="form-control" name="begindatum" id="begindatum"
+                                    <input type="date" class="form-control" name="startdatum" id="startdatum"
                                            value="{{\Carbon\Carbon::parse(\Carbon\Carbon::now())->format('d-m-Y')}}">
                                 </div>
                                 <div class="form-group">
@@ -317,28 +317,28 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th>Voertuigtype</th>
-                                    <th>Kenteken</th>
+                                    <th>Type</th>
                                     <th>Startdatum</th>
                                     <th>Einddatum</th>
+                                    <th>Notitie</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse($user->toVoertuiggebruiker as $voertuiggebruiker)
+                                @forelse($user->toAbsentie as $absentie)
                                     <form method="POST"
-                                          action="{{url('delete_user_voertuig',['user_id'=>$user->id])}}">
+                                          action="{{url('delete_user_absentie',['user_id'=>$user->id])}}">
                                         {{csrf_field()}}
                                         <tr>
-                                            <td>{{ucfirst($voertuiggebruiker->toVoertuigtype->lestype)}}</td>
-                                            <td>{{$voertuiggebruiker->kenteken}}</td>
-                                            <td>{{\Carbon\Carbon::parse($voertuiggebruiker->pivot->startdatum)->format('d-m-Y')}}</td>
+                                            <td>{{ucfirst($absentie->absentietype)}}</td>
+                                            <td>{{\Carbon\Carbon::parse($absentie->pivot->startdatum)->format('d-m-Y')}}</td>
                                             <td>
-                                                @if($voertuiggebruiker->pivot->einddatum != NULL)
-                                                    {{\Carbon\Carbon::parse($voertuiggebruiker->pivot->einddatum)->format('d-m-Y')}}
+                                                @if($absentie->pivot->einddatum != NULL)
+                                                    {{\Carbon\Carbon::parse($absentie->pivot->einddatum)->format('d-m-Y')}}
                                                 @else
                                                     n.v.t.
                                                 @endif
                                             </td>
+                                            <td>{{ucfirst($absentie->pivot->notitie)}}</td>
                                             <td>
                                                 <a>
                                                     <button type="submit" class="btn btn-danger">Verwijder</button>
@@ -348,7 +348,7 @@
                                     </form>
                                 @empty
                                     <tr>
-                                        <td>Nog geen toegekende voertuigen</td>
+                                        <td>Nog geen absentiesn</td>
                                     </tr>
                                 @endforelse
                                 </tbody>

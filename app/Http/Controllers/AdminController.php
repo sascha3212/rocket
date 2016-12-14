@@ -12,6 +12,7 @@ use App\Lespakket;
 use App\Rol;
 use App\Voertuigtype;
 use App\Lesprijs;
+use App\Feestdagen;
 use Auth;
 
 class AdminController extends Controller
@@ -32,11 +33,13 @@ class AdminController extends Controller
         $users = User::All();
         $voertuigen = Voertuig::orderBy('voertuigtype_voertuigtype_id')->get();
         $lespakketten = Lespakket::orderBy('voertuigtype_voertuigtype_id', 'DESC')->get();
+        $feestdagen = Feestdagen::orderBy('datum')->get();
 
         return view('beheer', [
             'users' => $users,
             'voertuigen' => $voertuigen,
-            'lespakketten' => $lespakketten
+            'lespakketten' => $lespakketten,
+            'feestdagen' => $feestdagen
         ]);
     }
 
@@ -296,7 +299,6 @@ class AdminController extends Controller
 
     public function insertNewUserAbsentie($user_id, Request $request)
     {
-
         $user = User::where("id", $user_id)->first();
 
         $begindatum = Carbon::parse($request->get('begindatum'))->format('Y-m-d');
@@ -305,5 +307,25 @@ class AdminController extends Controller
         $user->toAbsentie()->attach($request->get('absentietype_absentietype_id'), ['startdatum' => $begindatum, 'einddatum' => $einddatum, 'notitie' => $request->get('notitie')]);
 
         return redirect()->back();
+    }
+
+    public function newFeestdag()
+    {
+        return view('new_feestdag');
+    }
+
+    public function insertFeestdag(Request $request)
+    {
+        $datum = Carbon::parse($request->get('datum'))->format('Y-m-d');
+        $einddatum = Carbon::parse($request->get('einddatum'))->format('Y-m-d');
+
+        $feestdag = new Feestdagen();
+        $feestdag->feestdag = $request->get('feestdag');
+        $feestdag->datum = $datum;
+        $feestdag->einddatum = $einddatum;
+        $feestdag->notitie = $request->get('notitie');
+        $feestdag->save();
+
+        return redirect('/beheer');
     }
 }

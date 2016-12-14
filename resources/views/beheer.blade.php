@@ -220,14 +220,36 @@
                             <div id="collapseFive" class="panel-collapse collapse" role="tabpanel"
                                  aria-labelledby="headingFive">
                                 <div class="panel-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                                    richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
-                                    brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
-                                    aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-                                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente
-                                    ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                                    farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them
-                                    accusamus labore sustainable VHS.
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Feestdag</th>
+                                            <th>Datum</th>
+                                            <th>Einddatum</th>
+                                            <th>Notite</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($feestdagen as $feestdag)
+                                            <tr>
+                                                <td>{{ucfirst($feestdag->feestdag)}}</td>
+                                                <td>{{\Carbon\Carbon::parse($feestdag->datum)->format('d-m-Y')}}</td>
+                                                <td>{{$feestdag->einddatum}}</td>
+                                                <td>{{ucfirst($feestdag->notitie)}}</td>
+                                                <td>
+                                                    <button class="btn btn-danger">Verwijderen</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        <tr>
+                                            <td>
+                                                <a href="{{url('/new_feestdag')}}">
+                                                    <button class="btn btn-success">+ nieuw</button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

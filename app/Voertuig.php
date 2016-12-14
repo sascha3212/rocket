@@ -23,4 +23,10 @@ class Voertuig extends Model
     {
         return $this->belongsTo('App\Voertuigtype', 'voertuigtype_voertuigtype_id', 'voertuigtype_id');
     }
+
+    public function toOnderhoudsbeurt()
+    {
+        return $this->belongsToMany('App\User','onderhoudsbeurt','voertuig_kenteken', 'users_id')
+            ->withPivot('startdatum','einddatum','arbeidsloon','km-stand');
+    }
 }
