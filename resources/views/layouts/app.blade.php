@@ -56,15 +56,37 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     @if(Auth::user())
-                        <li class="hidden">
-                            <a href="#page-top"></a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="{{url('beheer')}}">beheer</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" href="{{url('logout')}}">Logout</a>
-                        </li>
+                        @if(Auth::user()->hasRole(1))
+                            <li class="hidden">
+                                <a href="#page-top"></a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="{{url('beheer')}}">beheer</a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="{{url('logout')}}">Logout</a>
+                            </li>
+                        @elseif(Auth::user()->hasRole(2))
+                            <li class="hidden">
+                                <a href="#page-top"></a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="{{url('/')}}">klanten</a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="{{url('logout')}}">Logout</a>
+                            </li>
+                        @elseif(Auth::user()->hasRole(3))
+                            <li class="hidden">
+                                <a href="#page-top"></a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="{{url('lessen')}}">lessen</a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="{{url('logout')}}">Logout</a>
+                            </li>
+                        @endif
                     @else
                         <li class="hidden">
                             <a href="#page-top"></a>

@@ -69,4 +69,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/new_feestdag',['uses' => 'AdminController@newFeestdag','middleware' => 'roles','roles' => [1] ]);
     Route::POST('/new_feestdag',['uses' => 'AdminController@insertFeestdag','middleware' => 'roles','roles' => [1] ]);
 
+
+    /**
+     * Routes for the logged in user
+     */
+
+    Route::get('/lessen',['uses' => 'UserController@reserveren','middleware' => 'roles','roles' => [3] ]);
+    Route::post('/new_les',['uses' => 'UserController@insertLes','middleware' => 'roles','roles' => [3] ]);
+
+    Route::get('/delete_les/{id}',['uses' => 'UserController@annuleerLes','middleware' => 'roles','roles' => [3] ]);
+
 });

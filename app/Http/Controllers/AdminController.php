@@ -44,7 +44,10 @@ class AdminController extends Controller
     }
 
 
-    //User routes
+    /**
+     * @param $id
+     * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|mixed
+     */
     public function getUser($id)
     {
         $user = User::all()->where('id', $id)->first();
@@ -55,6 +58,9 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * @return array|\Illuminate\Contracts\View\Factory|\Illuminate\View\View|mixed
+     */
     public function newUser()
     {
         return view('new_user');
